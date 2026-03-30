@@ -1,0 +1,14 @@
+name: Deploy PR Environment
+on: [pull_request]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and Deploy
+        env:
+          APP_TAG: ${{ secrets.APP_TAG }} 
+        run: docker-compose up -d --build
