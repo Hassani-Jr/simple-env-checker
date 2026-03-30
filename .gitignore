@@ -1,1 +1,37 @@
+# Go
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/vendor/
+/pkg/mod/
+
+# IDE/editor
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.tmp
+~*
+
+# Environment
 .env
+*.env
+docker-compose.override.yml
+
+# Logs / runtime
+*.log
+*.pid
+*.lock
+tmp/
+tmp-*
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
