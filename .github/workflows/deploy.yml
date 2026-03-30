@@ -11,4 +11,4 @@ jobs:
       - name: Build and Deploy
         env:
           APP_TAG: pr-${{ github.event.number }} 
-        run: docker-compose up -d --build
+        run: docker compose up -d --build
