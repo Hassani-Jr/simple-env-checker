@@ -1,8 +1,8 @@
-name: Deploy PR Environment
+name: Deploy and Test PR Environment
 on: [pull_request]
 
 jobs:
-  deploy:
+  deploy-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -12,3 +12,19 @@ jobs:
         env:
           APP_TAG: pr-${{ github.event.number }} 
         run: docker compose up -d --build
+
+      - name: Test Env Var
+        run: |
+          # Wait for the container to be fully up and running
+          sleep 10 
+          
+          # Fetch the response (fixed http:// typo)
+          RESPONSE=$(curl -s http://localhost:8080)
+          
+          # Check the variable $RESPONSE (added $)
+          if [[ "$RESPONSE" == *"pr-"* ]]; then
+              echo "Environment verified successfully. Response: $RESPONSE"
+          else
+              echo "Test failed. Response was: $RESPONSE"
+              exit 1
+          fi
